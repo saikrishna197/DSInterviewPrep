@@ -118,3 +118,45 @@ CROSS JOIN departments;
 
 It is important to note that when using joins, you should always include a condition in the ON clause to specify how the tables are related, otherwise you'll get cartesian product of the two tables.
 
+
+
+
+
+SQL window functions, also known as analytic functions, allow you to perform calculations on sets of data within a query. Window functions operate on a set of rows called a "window" and return a single value for each row in the result set. Some common window functions include:
+
+ROW_NUMBER(): assigns a unique number to each row within the result set, based on the order specified in the ORDER BY clause.
+
+Example:
+SELECT ROW_NUMBER() OVER (ORDER BY salary DESC) AS rank, first_name, last_name, salary 
+FROM employees;
+
+
+RANK(): assigns a rank to each row within the result set, based on the order specified in the ORDER BY clause. Rows with the same value will receive the same rank.
+
+Example:
+SELECT RANK() OVER (ORDER BY salary DESC) AS rank, first_name, last_name, salary 
+FROM employees;
+
+
+DENSE_RANK(): assigns a rank to each row within the result set, based on the order specified in the ORDER BY clause. Rows with the same value will receive the same rank, and there will be no gaps in the ranking.
+
+Example:
+SELECT DENSE_RANK() OVER (ORDER BY salary DESC) AS rank, first_name, last_name, salary 
+FROM employees;
+
+
+NTILE(n): assigns a group number (from 1 to n) to each row within the result set, based on the order specified in the ORDER BY clause. It is used to divide the result set into n number of groups or "tiles".
+
+Example:
+SELECT NTILE(4) OVER (ORDER BY salary DESC) AS quartile, first_name, last_name, salary 
+FROM employees;
+
+
+SUM() or COUNT() or AVG(): allows you to perform calculations on a set of rows, using the OVER() clause to specify the window or range of rows to include in the calculation.
+
+Example:
+SELECT first_name, last_name, salary, SUM(salary) OVER (PARTITION BY department) AS department_total 
+FROM employees;
+
+
+It is important to note that window functions are applied after the WHERE and JOIN clauses, but before the GROUP BY and HAVING clauses. So the result set after window functions are applied will be used for these clauses.
