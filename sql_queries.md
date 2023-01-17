@@ -71,3 +71,45 @@ SELECT department, COUNT(*) FROM employees GROUP BY department HAVING COUNT(*) >
 
 It is important to note that aggregate functions only work on numerical columns and will not work on text columns.
 
+
+
+A JOIN operation in SQL combines rows from two or more tables based on a related column between them. This allows you to query data from multiple tables as if they were a single table.
+
+There are several types of JOINs:
+
+INNER JOIN: returns only the rows that have matching values in both tables.
+Example:
+SELECT employees.first_name, employees.last_name, departments.name 
+FROM employees 
+INNER JOIN departments ON employees.department_id = departments.id;
+
+
+LEFT JOIN (or LEFT OUTER JOIN): returns all rows from the left table, and any matching rows from the right table. If there is no match, NULL values will be returned for right table's columns.
+Example:
+SELECT employees.first_name, employees.last_name, departments.name 
+FROM employees 
+LEFT JOIN departments ON employees.department_id = departments.id;
+
+
+RIGHT JOIN (or RIGHT OUTER JOIN): returns all rows from the right table, and any matching rows from the left table. If there is no match, NULL values will be returned for left table's columns.
+Example:
+SELECT employees.first_name, employees.last_name, departments.name 
+FROM employees 
+RIGHT JOIN departments ON employees.department_id = departments.id;
+
+
+FULL JOIN (or FULL OUTER JOIN): returns all rows from both tables, and any matching rows will be combined into a single row. If there is no match, NULL values will be returned for the non-matching columns.
+Example:
+SELECT employees.first_name, employees.last_name, departments.name 
+FROM employees 
+FULL JOIN departments ON employees.department_id = departments.id;
+
+
+CROSS JOIN: returns the Cartesian product of the two tables, which is every possible combination of rows from the two tables.
+Example:
+SELECT employees.first_name, departments.name 
+FROM employees 
+CROSS JOIN departments;
+
+It is important to note that when using joins, you should always include a condition in the ON clause to specify how the tables are related, otherwise you'll get cartesian product of the two tables.
+
