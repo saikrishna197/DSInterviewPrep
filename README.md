@@ -10,3 +10,8 @@ https://github.com/andrewekhalel/MLQuestions
 https://github.com/khangich/machine-learning-interview
 
 https://github.com/shafaypro/CrackingMachineLearningInterview
+
+
+# Python Cheat Sheet
+
+https://www.pythoncheatsheet.org
